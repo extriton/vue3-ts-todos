@@ -1,30 +1,32 @@
 <template>
-<div class="todos-wrap">
-  
-  <TodoHeader />
-  <TodoFilters />
+  <div class="todos-wrap">
+    <TodoHeader />
+    <TodoFilters />
 
-  <main class="app-main">
-    <TodoList :todos="todos"/>
-    <TodoAddItem />
-  </main>
+    <main class="app-main">
+      <TodoList
+        :todos="todos"
+        @toggle-todo="toggleTodo"
+        @remove-todo="removeTodo"
+      />
+      <TodoAddItem />
+    </main>
 
-  <TodoFooter />
-
-</div>
+    <TodoFooter />
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import TodoHeader from '@/components/todos/TodoHeader.vue'
-import TodoFilters from '@/components/todos/TodoFilters.vue';
-import TodoList from '@/components/todos/TodoList.vue';
-import TodoAddItem from '@/components/todos/TodoAddItem.vue';
-import TodoFooter from '@/components/todos/TodoFooter.vue';
-import { ITodo } from '@/types/ITodo';
+import { defineComponent } from "vue";
+import TodoHeader from "@/components/todos/TodoHeader.vue";
+import TodoFilters from "@/components/todos/TodoFilters.vue";
+import TodoList from "@/components/todos/TodoList.vue";
+import TodoAddItem from "@/components/todos/TodoAddItem.vue";
+import TodoFooter from "@/components/todos/TodoFooter.vue";
+import { ITodo } from "@/types/ITodo";
 
 interface State {
-  todos: ITodo[]
+  todos: ITodo[];
 }
 
 export default defineComponent({
@@ -33,20 +35,29 @@ export default defineComponent({
     TodoFilters,
     TodoList,
     TodoAddItem,
-    TodoFooter
+    TodoFooter,
   },
   data(): State {
     return {
       todos: [
-        { id: 1, text: 'Learn the basics of Vue', completed: true },
-        { id: 2, text: 'Learn the basics of Typescript', completed: false },
-        { id: 3, text: 'Subscribe to the channel', completed: false },
-        { id: 4, text: 'Subscribe to the channel222', completed: false }
-      ]
-    }
-  }
-})
-
+        { id: 1, text: "Learn the basics of Vue", completed: true },
+        { id: 2, text: "Learn the basics of Typescript", completed: false },
+        { id: 3, text: "Subscribe to the channel", completed: false },
+      ],
+    };
+  },
+  methods: {
+    toggleTodo(id: number) {
+      const targetTodo: ITodo | undefined = this.todos.find((todo: ITodo) => todo.id === id);
+      if (targetTodo) {
+        targetTodo.completed = !targetTodo.completed;
+      }
+    },
+    removeTodo(id: number) {
+      this.todos = this.todos.filter((todo: ITodo ) => todo.id !== id)
+    },
+  },
+});
 </script>
 
 <style>
