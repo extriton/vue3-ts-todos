@@ -21,7 +21,7 @@ export default defineComponent({
   },
   props: {
     todos: {
-      type: Object as PropType<ITodo[]>,
+      type: Array as PropType<ITodo[]>,
       required: true,
     },
   },

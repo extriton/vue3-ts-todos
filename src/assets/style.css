@@ -36,6 +36,10 @@ button {
   border-radius: 1.6rem;
 }
 
+.button:hover {
+  cursor: pointer;
+}
+
 .button--primary {
   color: var(--primary-color);
   border: 2px solid var(--primary-color);
