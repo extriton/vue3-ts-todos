@@ -12,7 +12,7 @@
       <TodoAddItem @add-todo="addTodo"/>
     </main>
 
-    <TodoFooter />
+    <TodoFooter :stats="stats"/>
   </div>
 </template>
 
@@ -22,7 +22,7 @@ import TodoHeader from "@/components/todos/TodoHeader.vue";
 import TodoFilters from "@/components/todos/TodoFilters.vue";
 import TodoList from "@/components/todos/TodoList.vue";
 import TodoAddItem from "@/components/todos/TodoAddItem.vue";
-import TodoFooter from "@/components/todos/TodoFooter.vue";
+import TodoFooter, { Stats } from "@/components/todos/TodoFooter.vue";
 import { ITodo } from "@/types/ITodo";
 import { TFilter } from "@/types/TFilter";
 
@@ -50,18 +50,28 @@ export default defineComponent({
     };
   },
   computed: {
+    activeTodos(): ITodo[] {
+      return this.todos.filter(todo => !todo.completed)
+    },
+    doneTodos(): ITodo[] {
+      return this.todos.filter(todo => todo.completed)
+    },
     filteredTodos(): ITodo[] { 
-
       switch (this.activeFilter) {
         case 'Active': 
-          return this.todos.filter(todo => !todo.completed)
+          return this.activeTodos
         case 'Done': 
-          return this.todos.filter(todo => todo.completed)
+          return this.doneTodos
         case 'All':
         default:
           return this.todos
       }
-
+    },
+    stats(): Stats {
+      return {
+        active: this.activeTodos.length,
+        done: this.doneTodos.length
+      }
     }
   },
   methods: {
