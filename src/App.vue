@@ -1,64 +1,58 @@
 <template>
+<div class="todos-wrap">
   
-  <header class="app-header">
-    <span class="logo">TODOS</span>
-  </header>
-
-  <aside class="app-filters">
-    <section class="toggle-group">
-      <button class="button button--primary">All</button>
-      <button class="button">Active</button>
-      <button class="button">Done</button>
-    </section>
-  </aside>
+  <TodoHeader />
+  <TodoFilters />
 
   <main class="app-main">
-    <ul class="todo-list">
-      <li class="todo-item todo-item--done">
-        <div class="todo-item__status">
-          <i class="bi bi-check2"></i>
-        </div>
-        <span class="todo-item__text">Learn the basics of Vue</span>
-        <button class="todo-item__remove-button">
-          <i class="bi bi-trash3"></i>
-        </button>
-      </li>
-      <li class="todo-item">
-        <div class="todo-item__status">
-          <i class="bi bi-check2"></i>
-        </div>
-        <span class="todo-item__text">Learn the basics of Typescript</span>
-        <button class="todo-item__remove-button">
-          <i class="bi bi-trash3"></i>
-        </button>
-      </li>
-      <li class="todo-item">
-        <div class="todo-item__status">
-          <i class="bi bi-check2"></i>
-        </div>
-        <span class="todo-item__text">Subscribe to the channel</span>
-        <button class="todo-item__remove-button">
-          <i class="bi bi-trash3"></i>
-        </button>
-      </li>
-    </ul>
-
-    <section class="add-todo">
-      <button class="add-todo__show-form-button">
-        <i class="bi bi-plus-lg"></i>
-      </button>
-      <form class="add-todo__form">
-        <button class="close-button" type="button">
-          <i class="bi bi-x"></i>
-        </button>
-        <div class="text-input text-input--focus">
-          <input class="input" />
-        </div>
-        <button class="button button--filled">Add task</button>
-      </form>
-    </section>
+    <TodoList :todos="todos"/>
+    <TodoAddItem />
   </main>
 
-  <footer class="app-footer">2 more to do, 1 done</footer>
+  <TodoFooter />
 
+</div>
 </template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+import TodoHeader from '@/components/todos/TodoHeader.vue'
+import TodoFilters from '@/components/todos/TodoFilters.vue';
+import TodoList from '@/components/todos/TodoList.vue';
+import TodoAddItem from '@/components/todos/TodoAddItem.vue';
+import TodoFooter from '@/components/todos/TodoFooter.vue';
+import { ITodo } from '@/types/ITodo';
+
+interface State {
+  todos: ITodo[]
+}
+
+export default defineComponent({
+  components: {
+    TodoHeader,
+    TodoFilters,
+    TodoList,
+    TodoAddItem,
+    TodoFooter
+  },
+  data(): State {
+    return {
+      todos: [
+        { id: 1, text: 'Learn the basics of Vue', completed: true },
+        { id: 2, text: 'Learn the basics of Typescript', completed: false },
+        { id: 3, text: 'Subscribe to the channel', completed: false },
+        { id: 4, text: 'Subscribe to the channel222', completed: false }
+      ]
+    }
+  }
+})
+
+</script>
+
+<style>
+.todos-wrap {
+  padding: 15px;
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+</style>

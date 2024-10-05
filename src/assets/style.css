@@ -3,8 +3,8 @@
 
 :root {
   --primary-color: #E30808;
-  --secondary-color: #e3e3e3;
-  --light-color: #f0f0f0;
+  --secondary-color: #a3a3a3;
+  --light-color: #d0d0d0;
   --reverse-color: #ffffff;
   --default-color: #000000;
 }
@@ -127,6 +127,7 @@ button {
   box-sizing: border-box;
   border: 0.1rem solid var(--light-color);
   border-radius: 1.6rem;
+  margin-bottom: 15px;
 }
 
 .toggle-group .button {
@@ -223,6 +224,7 @@ button {
 
 .todo-item__remove-button:hover {
   color: var(--primary-color);
+  cursor: pointer;
 }
 
 .add-todo {
