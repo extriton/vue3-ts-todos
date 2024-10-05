@@ -9,7 +9,7 @@
         @toggle-todo="toggleTodo"
         @remove-todo="removeTodo"
       />
-      <TodoAddItem />
+      <TodoAddItem @add-todo="addTodo"/>
     </main>
 
     <TodoFooter />
@@ -47,6 +47,9 @@ export default defineComponent({
     };
   },
   methods: {
+    addTodo(todo: ITodo) {
+      this.todos.push(todo)
+    },
     toggleTodo(id: number) {
       const targetTodo: ITodo | undefined = this.todos.find((todo: ITodo) => todo.id === id);
       if (targetTodo) {

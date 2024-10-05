@@ -47,6 +47,11 @@ button {
   background-color: var(--primary-color);
 }
 
+.button--filled:hover {
+  opacity: .8;
+  cursor: pointer;
+}
+
 .button--primary:hover {
   opacity: 0.8;
 }
@@ -245,6 +250,7 @@ button {
 
 .add-todo__show-form-button:hover {
   box-shadow: 0px 1px 20px rgb(240 240 240 / 80%);
+  cursor: pointer;
 }
 
 .add-todo__form {
@@ -263,6 +269,7 @@ button {
 
 .add-todo__form .close-button:hover {
   color: var(--primary-color);
+  cursor: pointer;
 }
 
 .app-footer {
